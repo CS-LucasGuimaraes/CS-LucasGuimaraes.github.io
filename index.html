@@ -23,6 +23,19 @@
   box-sizing: border-box;
 }
 
+.button {
+  background-color: transparent !important; /* Remove button background */ 
+  margin-left: 275px;
+  border: none; /* Remove button border */
+  padding: 0; /* Remove button padding */
+  display: block;
+  position: fixed;
+  font-size: 0; /* Hide button text */
+  height: 20px; /* Set button height (adjust as needed) */
+  width: 20px; /* Set button width (adjust as needed) */
+  text-align: center; /* Center content horizontally */ 
+}
+
 a {
   color: #333; /* Assuming a white background */
   text-decoration: none;
@@ -53,6 +66,20 @@ body {
   
 }
 
+/* Class to show the sidebar */
+.sidebar.show {
+  display: none;
+}
+
+/* Class to adjust main content padding when sidebar is shown */
+.flexbox-container.sidebar-pushed {
+  padding-left: 0px;
+}
+
+.button.pushed{
+  margin-left: 0px
+}
+
 @media (max-width: 840px) {
   .sidebar {
     display: none; /* Hide the sidebar completely */
@@ -60,26 +87,31 @@ body {
   .flexbox-container {
     padding-left: 0;
   }
-}
+  .button{
+    margin-left: 0px
+  }
 
-/* Class to show the sidebar */
-.sidebar.show {
-  display: block;
-}
-
-/* Class to adjust main content padding when sidebar is shown */
-.flexbox-container.sidebar-pushed {
-  padding-left: calc(275px + 10px); /* Adjust as needed */
+  .sidebar.show {
+    display: block;
+  }
+  
+  .button.pushed {
+    margin-left: 275px;
+  }
 }
 
 </style>
 
-<!-- <button id="show-sidebar">Show Sidebar</button> -->
+
 
 <head> </head>
 
-<div class="sidebar">
+<div class="button", style="display: block;">
+  <button id="show-sidebar"> >> </button>
+</div>
 
+<div class="sidebar">
+  
   <img src="assets/portrait.png" alt="portrait" width="250px" height="auto">
   <h2> 📖 Table of Contents </h2>
     <ul>
@@ -283,10 +315,12 @@ body {
 
     <script>
     const sidebar = document.querySelector('.sidebar');
+    const button = document.querySelector('.button');
     const showSidebarButton = document.getElementById('show-sidebar');
     const flexboxContainer = document.querySelector('.flexbox-container');
-    
+    // sidebar-button-pushed
     showSidebarButton.addEventListener('click', () => {
+        button.classList.toggle('pushed');
         sidebar.classList.toggle('show');
         flexboxContainer.classList.toggle('sidebar-pushed');
     });
